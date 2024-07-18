@@ -1,12 +1,31 @@
+local currentMaxSpeed = 0
+
 RegisterCommand(Config.CommandName, function(source, args, rawCommand)
+    local action = tonumber(args[1])
+
+    if action == nil then
+        lib.notify({
+            description = Config.Messages.invalidSpeed,
+            type = 'error'
+        })
+        return
+    end
+
     local vehicle = GetVehiclePedIsIn(PlayerPedId(), false)
-    local maxSpeed = tonumber(args[1])
 
     if vehicle and vehicle ~= 0 then
-        if maxSpeed then
-            SetVehicleMaxSpeed(vehicle, maxSpeed / 3.6)
+        if action == 0 then
+            currentMaxSpeed = Config.MaxSpeedWhenDisabled
+            SetVehicleMaxSpeed(vehicle, currentMaxSpeed)
             lib.notify({
-                description = string.format(Config.Messages.success, args[1]),
+                description = Config.Messages.disabled,
+                type = 'inform'
+            })
+        elseif action > 0 then
+            currentMaxSpeed = action / 3.6
+            SetVehicleMaxSpeed(vehicle, currentMaxSpeed)
+            lib.notify({
+                description = string.format(Config.Messages.success, action),
                 type = 'success'
             })
         else

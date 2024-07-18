@@ -1,9 +1,12 @@
 Config = {}
 
+Config.CommandName = 'cc'
+
 Config.Messages = {
-    success = 'Cruise control sat til %d km/t',
-    invalidSpeed = 'Ugyldig hastighed. Vær venlig at indtaste en numerisk værdi.',
-    notInVehicle = 'Du skal være i et køretøj for at ændre hastigheden.'
+    success = "Vehicle max speed set to %skm/h.",
+    disabled = "Vehicle speed limit disabled.",
+    invalidSpeed = "Invalid speed. Please specify a valid number.",
+    notInVehicle = "You are not in a vehicle.",
 }
 
-Config.CommandName = 'cc'
+Config.MaxSpeedWhenDisabled = 9999.0  -- Set this higher if you have extremely fast cars
